@@ -4,16 +4,16 @@ Orbit Click is a Windows VST3 instrument with two audible rhythm clocks. Each la
 
 ## Build on Windows x64
 
-Install Visual Studio 2026 with the **Desktop development with C++** workload, the x64 MSVC build tools, a Windows SDK, and C++ CMake tools. Use CMake 4.2 or newer for the Visual Studio 2026 generator. JUCE 8.0.12 is fetched during configuration unless `JUCE_DIR` points to a local checkout. From a Developer PowerShell:
+Install Visual Studio 2026 with the **Desktop development with C++** workload, the x64 MSVC build tools, a Windows SDK, and C++ CMake tools. Use CMake 4.2 or newer for the Visual Studio 2026 generator. JUCE 8.0.12 is fetched during configuration unless `JUCE_DIR` points to a local checkout. This machine's default `cmake` is 4.1, so use Visual Studio's bundled CMake from PowerShell:
 
 ```powershell
-cmake -G "Visual Studio 18 2026" -S . -B build -A x64
-cmake --build build --config Release --target OrbitClick_VST3
-cmake --build build --config Release --target orbit_timing_tests orbit_state_tests
-ctest --test-dir build -C Release --output-on-failure
+$vsCmake = 'C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin'
+& "$vsCmake\cmake.exe" -G "Visual Studio 18 2026" -S . -B build-2026 -A x64
+& "$vsCmake\cmake.exe" --build build-2026 --config Release --target OrbitClick_VST3 orbit_timing_tests orbit_state_tests -- /m:1
+& "$vsCmake\ctest.exe" --test-dir build-2026 -C Release --output-on-failure
 ```
 
-The VST3 bundle is produced under `build/OrbitClick_artefacts/Release/VST3/Orbit Click.vst3`. Copy that complete folder to `%CommonProgramFiles%\VST3`, rescan plugins in Mixcraft, and load it as an instrument. Keep Mixcraft's transport playing to hear the clicks.
+The VST3 bundle is produced under `build-2026/OrbitClick_artefacts/Release/VST3/Orbit Click.vst3`. Copy that complete folder to `%CommonProgramFiles%\VST3`, rescan plugins in Mixcraft, and load it as an instrument. Keep Mixcraft's transport playing to hear the clicks.
 
 ## Timing design
 

@@ -4,9 +4,9 @@
 
 namespace
 {
-constexpr auto background = juce::Colour (0xff101724);
-constexpr auto muted = juce::Colour (0xff8794a9);
-constexpr auto colors = std::array<juce::Colour, 2> { juce::Colour (0xff54e0c4), juce::Colour (0xffffb968) };
+const auto background = juce::Colour (0xff101724);
+const auto muted = juce::Colour (0xff8794a9);
+const auto colors = std::array<juce::Colour, 2> { juce::Colour (0xff54e0c4), juce::Colour (0xffffb968) };
 
 juce::String id (int layer, const char* suffix)
 {
