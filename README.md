@@ -46,7 +46,7 @@ The realignment display is the least common multiple of the two cycle durations 
 
 ## Scope and verification
 
-Manual rhythm entry is supported. MIDI import and automatic cycle detection are later work. No personal MIDI data or music analysis files are included in this repository. `Tests/TimingTests.cpp` covers equal-cycle 3:2, different-length cycles, starting mid-song, off-grid seeking, loop wrapping, and a tempo change. `Tests/StateTests.cpp` checks a parameter save and restore roundtrip. Both tests passed on Windows x64 with Visual Studio 2026. Mixcraft 10.6 Pro Studio has been reported to load and play the plugin; other DAWs and detailed seek, loop, tempo-change, and session-restore behavior have not yet been verified in a host.
+Manual rhythm entry is supported. MIDI import and automatic cycle detection are later work. No personal MIDI data or music analysis files are included in this repository. `Tests/TimingTests.cpp` covers equal-cycle 3:2, different-length cycles, starting mid-song, off-grid seeking, loop wrapping, and a tempo change. `Tests/StateTests.cpp` checks a parameter save and restore roundtrip. Both tests passed on Windows x64 with Visual Studio 2026. Mixcraft 10.6 Pro Studio has been reported to load and play the plugin. Other DAWs have not been tested yet; feel free to try it in a Windows DAW that supports x64 VST3 instruments and [report what works or fails](https://github.com/demoproud/OrbitClick/issues). Detailed seek, loop, tempo-change, and session-restore behavior also remains open for host testing.
 
 ## Privacy and security
 
