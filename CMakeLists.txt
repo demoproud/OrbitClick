@@ -1,18 +1,17 @@
 cmake_minimum_required(VERSION 3.22)
-project(OrbitClick VERSION 0.1.0 LANGUAGES CXX)
+project(OrbitClick VERSION 0.1.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Point JUCE_DIR at a JUCE checkout, or let CMake fetch the pinned release.
+# Point JUCE_DIR at a JUCE checkout, or fetch the verified 8.0.17 security release.
 if (DEFINED JUCE_DIR)
     add_subdirectory("${JUCE_DIR}" JUCE)
 else()
     include(FetchContent)
     FetchContent_Declare(JUCE
         GIT_REPOSITORY https://github.com/juce-framework/JUCE.git
-        GIT_TAG 8.0.12
-        GIT_SHALLOW TRUE)
+        GIT_TAG dabd5ad13cd869cba41046947fffc8e5ce5cd662)
     FetchContent_MakeAvailable(JUCE)
 endif()
 

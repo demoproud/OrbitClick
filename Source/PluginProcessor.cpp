@@ -94,11 +94,14 @@ void OrbitClickProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
 
     const auto bpm = pos->getBpm().orFallback (90.0);
     const auto ppq = pos->getPpqPosition();
-    const auto playing = pos->getIsPlaying() && ppq.hasValue() && bpm > 0.0;
+    const auto playing = pos->getIsPlaying() && ppq.hasValue() && std::isfinite (*ppq)
+                      && std::isfinite (bpm) && bpm > 0.0;
     auto signature = pos->getTimeSignature().orFallback (juce::AudioPlayHead::TimeSignature { 4, 4 });
     const auto loop = pos->getLoopPoints();
-    const bool validLoop = pos->getIsLooping() && loop.hasValue() && loop->ppqEnd > loop->ppqStart;
-    const double quarterPerSample = bpm / (60.0 * currentSampleRate);
+    const bool validLoop = pos->getIsLooping() && loop.hasValue()
+                        && std::isfinite (loop->ppqStart) && std::isfinite (loop->ppqEnd)
+                        && loop->ppqEnd > loop->ppqStart;
+    const double quarterPerSample = playing ? bpm / (60.0 * currentSampleRate) : 0.0;
     const auto layers = std::array<orbit::Layer, 2> { layer (0), layer (1) };
     const auto gains = std::array<double, 2> {
         parameterPointers[0].volume->load() * (parameterPointers[0].mute->load() < 0.5f ? 1.0 : 0.0),
@@ -107,15 +110,16 @@ void OrbitClickProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
         std::exp (-1.0 / (0.009 * currentSampleRate)),
         std::exp (-1.0 / (0.018 * currentSampleRate)) };
 
-    shownBpm.store (bpm);
-    shownNumerator.store (signature.numerator);
-    shownDenominator.store (signature.denominator);
+    shownBpm.store (std::isfinite (bpm) && bpm > 0.0 ? bpm : 90.0);
+    shownNumerator.store (juce::jlimit (1, 32, signature.numerator));
+    shownDenominator.store (juce::jlimit (1, 32, signature.denominator));
     shownBarCount.store (pos->getBarCount().orFallback (-1));
     shownLastBarStart.store (pos->getPpqPositionOfLastBarStart().orFallback (-1.0));
-    shownHostPosition.store (ppq.hasValue());
+    shownHostPosition.store (ppq.hasValue() && std::isfinite (*ppq));
     shownPlaying.store (playing);
-    shownPosition.store (ppq.orFallback (0.0));
-    shownSeconds.store (pos->getTimeInSeconds().orFallback (0.0));
+    shownPosition.store (ppq.hasValue() && std::isfinite (*ppq) ? *ppq : 0.0);
+    const auto hostSeconds = pos->getTimeInSeconds().orFallback (0.0);
+    shownSeconds.store (std::isfinite (hostSeconds) ? hostSeconds : 0.0);
     if (! playing)
     {
         wasPlaying = false;
@@ -165,7 +169,7 @@ void OrbitClickProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     if (validLoop)
         end = orbit::wrapLoop (end, loop->ppqStart, loop->ppqEnd);
     shownPosition.store (end);
-    shownSeconds.store (pos->getTimeInSeconds().orFallback (0.0) + samples / currentSampleRate);
+    shownSeconds.store ((std::isfinite (hostSeconds) ? hostSeconds : 0.0) + samples / currentSampleRate);
     lastEndPosition = end;
 }
 
