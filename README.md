@@ -2,7 +2,7 @@
 
 <img width="1109" height="852" alt="Orbit Click plugin showing two circular rhythm clocks" src="https://github.com/user-attachments/assets/176d8ab5-bc78-4b14-bb4d-3a88408a5541" />
 
-Orbit Click is a free, open-source Windows 64-bit VST3 instrument for hearing and seeing two rhythms at once. It makes its own short click sounds; no samples or MIDI files are needed. Load it on an instrument track and start your DAW's transport.
+Orbit Click is a free, open-source Windows 64-bit VST3 instrument for hearing and seeing two rhythms at once. It is intended for DAWs that support Windows x64 VST3 instruments. It makes its own short click sounds; no samples or MIDI files are needed. Load it on an instrument track and start your DAW's transport.
 
 ## What it does
 
@@ -23,7 +23,7 @@ The status line shows bar, beat, elapsed time, BPM, and next realignment. It use
 
 ## Download and install on Windows x64
 
-Download [OrbitClick-0.1.0-win64.zip](dist/OrbitClick-0.1.0-win64.zip) and extract it. Copy the **entire** `Orbit Click.vst3` folder into `%CommonProgramFiles%\VST3`, then rescan plugins in your DAW and load Orbit Click as an instrument. Copying only the file inside the bundle will not install it correctly. The ZIP includes the licence and third-party notices. You can verify the download with [SHA256SUMS.txt](dist/SHA256SUMS.txt). Mixcraft 10.6 Pro Studio has been reported to load and play the plugin; detailed seek, loop, tempo-change, and session-restore checks in Mixcraft remain open.
+Download [OrbitClick-0.1.0-win64.zip](dist/OrbitClick-0.1.0-win64.zip) and extract it. Copy the **entire** `Orbit Click.vst3` folder into `%CommonProgramFiles%\VST3`, then rescan plugins in your DAW and load Orbit Click as an instrument. Copying only the file inside the bundle will not install it correctly. The ZIP includes the licence and third-party notices. You can verify the download with [SHA256SUMS.txt](dist/SHA256SUMS.txt).
 
 ## Build on Windows x64
 
@@ -46,7 +46,7 @@ The realignment display is the least common multiple of the two cycle durations 
 
 ## Scope and verification
 
-Manual rhythm entry is supported. MIDI import and automatic cycle detection are later work. No personal MIDI data or music analysis files are included in this repository. `Tests/TimingTests.cpp` covers equal-cycle 3:2, different-length cycles, starting mid-song, off-grid seeking, loop wrapping, and a tempo change. `Tests/StateTests.cpp` checks a parameter save and restore roundtrip. Both tests passed on Windows x64 with Visual Studio 2026.
+Manual rhythm entry is supported. MIDI import and automatic cycle detection are later work. No personal MIDI data or music analysis files are included in this repository. `Tests/TimingTests.cpp` covers equal-cycle 3:2, different-length cycles, starting mid-song, off-grid seeking, loop wrapping, and a tempo change. `Tests/StateTests.cpp` checks a parameter save and restore roundtrip. Both tests passed on Windows x64 with Visual Studio 2026. Mixcraft 10.6 Pro Studio has been reported to load and play the plugin; other DAWs and detailed seek, loop, tempo-change, and session-restore behavior have not yet been verified in a host.
 
 ## Privacy and security
 
