@@ -1,6 +1,6 @@
 # Orbit Click
 
-<img width="1109" height="852" alt="Orbit Click plugin showing two circular rhythm clocks" src="https://github.com/user-attachments/assets/176d8ab5-bc78-4b14-bb4d-3a88408a5541" />
+<img width="1093" height="768" alt="image" src="https://github.com/user-attachments/assets/fea709a9-23bf-49d2-8170-511be10e38f4" />
 
 Orbit Click is a free, open-source Windows 64-bit VST3 instrument for hearing and seeing two rhythms at once. It is intended for DAWs that support Windows x64 VST3 instruments. It makes its own short click sounds; no samples or MIDI files are needed. Load it on an instrument track and start your DAW's transport.
 
