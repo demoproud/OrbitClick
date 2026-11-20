@@ -1,5 +1,7 @@
 # Orbit Click
 
+<img width="1109" height="852" alt="image" src="https://github.com/user-attachments/assets/176d8ab5-bc78-4b14-bb4d-3a88408a5541" />
+
 Orbit Click is a Windows VST3 instrument with two audible rhythm clocks. Each layer has a cycle length (number of notes × note value), evenly spaced hits per cycle, volume, and mute. The defaults make a 3:2 rhythm over one 4/4 bar. For a three-eighth-note cycle against a 4/4 bar, set layer 1 to **3 × Eighth, 1 hit** and layer 2 to **8 × Eighth, 1 hit**. The clocks use the host's quarter-note position, and the status line shows bar, beat, elapsed time, BPM, and the next cycle realignment. A host should supply bar count and elapsed time for exact labels; otherwise the bar label is estimated from the current meter.
 
 ## Build on Windows x64
